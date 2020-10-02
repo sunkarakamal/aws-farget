@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../HCCP-GL-Platform-DV/.idea/HCCP-GL-Platform-DV.iml" filepath="$PROJECT_DIR$/../HCCP-GL-Platform-DV/.idea/HCCP-GL-Platform-DV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/aws-farget.iml" filepath="$PROJECT_DIR$/.idea/aws-farget.iml" />
+    </modules>
+  </component>
+</project>

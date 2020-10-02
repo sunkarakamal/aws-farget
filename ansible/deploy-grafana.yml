@@ -4,6 +4,6 @@
   hosts: localhost
   gather_facts: true
   vars_files:
-    - ./vars/secret.yml
+    - \vars\main.yml
   roles:
     - ansible-role-install-grafana
