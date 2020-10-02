@@ -1,7 +1,5 @@
 # tasks file for ansible-role-install-grafana
 
-- name: artifactory  login
-  shell: " docker login https://artifactory.dxc.com -u svc-fciidxc-docker -p yeKYsoy48H "
 
 - name: Create task definition
   ecs_taskdefinition:
