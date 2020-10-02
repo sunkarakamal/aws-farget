@@ -1,0 +1,14 @@
+---
+# vars file for ansible-role-install-grafana
+
+
+cluster_name: rcp-ecs-cluster
+repository_name: "artifactory.dxc.com/fciidxc-docker"
+image_name: grafana6.5.3_master
+image_version: v2.0.0
+region: "{{ region }}"
+vpc_id: "vpc-0bf71f1955e806829"
+subnet_id1: "subnet-048005e71e621caa3"
+subnet_id2: "subnet-0981f802929b0d51a"
+security_group: "sg-03895263c415e9894"
+iam_role: "RegionalSvcs-SSMRoleForInstances-VUETYPVCS29U"

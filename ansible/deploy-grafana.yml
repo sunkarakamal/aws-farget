@@ -1,0 +1,9 @@
+---
+
+- name: FCI | Deploy Grafana
+  hosts: localhost
+  gather_facts: true
+  vars_files:
+    - ./vars/secret.yml
+  roles:
+    - ansible-role-install-grafana

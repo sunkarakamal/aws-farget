@@ -1,0 +1,58 @@
+---
+# tasks file for ansible-role-install-grafana
+
+- name: get ecs cluster info
+  ecs_service_info:
+    aws_access_key: "{{ access_key_id }}"
+    aws_secret_key: "{{ secret_access_key }}"
+    region: "{{ region }}"
+    cluster: {{cluster_name}}
+  register: output
+
+- name: artifactory  login (must `--no-include-email`)
+  shell:
+
+- name: Create task definition
+  ecs_taskdefinition:
+    family: "{{ cluster_name }}-taskdef"
+    task_role_arn: "{{ ecs_role.arn }}"
+    execution_role_arn: "{{ ecs_role.arn }}"
+    containers:
+    - name: "grafana 6.5"
+      essential: true
+      image: "{{ ecr_repo.repository.repositoryUri }}:{{ image_version }}"
+      portMappings:
+      - containerPort: 8448
+        hostPort:      8448
+      logConfiguration:
+        logDriver: awslogs
+        options:
+          awslogs-group: "{{ cluster_name }}"
+          awslogs-region: eu-west-1
+          awslogs-stream-prefix: "{{ cluster_name }}-containers"
+    launch_type: FARGATE
+    cpu: 512
+    memory: 1GB
+    state: present
+    network_mode: awsvpc
+
+- name: Create an ECS service
+  ecs_service:
+    state: present
+    name: "{{ cluster_name }}"
+    cluster: "{{ cluster_name }}"
+    task_definition: "{{ cluster_name }}-taskdef"
+    launch_type: FARGATE
+    network_configuration:
+      assign_public_ip: yes
+      subnets:
+      - "{{ subnet_id1 }}"
+      - "{{ subnet_id2}}"
+      security_groups:
+      - "{{ security_group }}"
+    desired_count: "{{ size_of_cluster }}"
+    region: "{{ region }}"
+    deployment_configuration:
+      minimum_healthy_percent: 75
+      maximum_percent: 150
+
